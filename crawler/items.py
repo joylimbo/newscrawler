@@ -40,4 +40,5 @@ class NewsItem(Item):
     content = Field()
     images = Field()
     video = Field()
+    tags = Field()
 

@@ -14,22 +14,29 @@ from scrapy.http import Request
 from crawler.items import *
 
 class Spider(CrawlSpider):
-    '''
-    get news from sohu
-    '''
     name = 'sohu'
     start_urls =[
             'http://m.sohu.com/',
             ]
+    "http://m.sohu.com/cm/367443014/?_once_=000019_pinglun_zhengwenye_gengduopinglunv2&tag=all&_smuid=1FlfiUkvPt9rZMvzn6Qjxa&v=2"
+    "http://m.sohu.com/cm/367443014/?page=3&tag=all"
+
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//a/@href").re("/n/.*"))):
-            yield Request("http://m.sohu.com"+url,callback=self.parse_content)
+        for url in list(set(hxs.select("//a/@href").re("/n/.*/"))):
+            yield Request("http://m.sohu.com"+url+"?show_rest_pages=1",callback=self.parse_content)
 
     def return_item(self,item):
         return items
 
-    def parse_content(response):
+    def parse_content(self,response):
         item = NewsItem()
+        item['title'] = hxs.select("//h2[@class=\"a3\"]/text()").extract()[0].strip()
+        item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
+        item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
+        item['tags'] = ""
+        item['images'] = ""
+        return item
 
-        return items
+    def parse__comment(self,response):
+        pass
