@@ -33,3 +33,11 @@ class StoreItem(Item):
 
     def __str__(self):
         return ("StoreItem:%s"%(self['name']))
+
+class NewsItem(Item):
+    title = Field()
+    datetime  = Field()
+    content = Field()
+    images = Field()
+    video = Field()
+
