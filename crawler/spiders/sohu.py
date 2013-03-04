@@ -30,6 +30,7 @@ class Spider(CrawlSpider):
         return items
 
     def parse_content(self,response):
+        hxs = HtmlXPathSelector(response)
         item = NewsItem()
         item['title'] = hxs.select("//h2[@class=\"a3\"]/text()").extract()[0].strip()
         item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
