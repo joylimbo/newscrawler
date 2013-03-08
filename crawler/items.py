@@ -41,4 +41,6 @@ class NewsItem(Item):
     images = Field()
     video = Field()
     tags = Field()
-
+    keywords = Field()
+    comments = Field()
+    best = Field()

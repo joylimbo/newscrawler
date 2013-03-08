@@ -35,9 +35,21 @@ class Spider(CrawlSpider):
         item['title'] = hxs.select("//h2[@class=\"a3\"]/text()").extract()[0].strip()
         item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
         item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
-        item['tags'] = ""
+        item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
+	item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
+	item['tags'] = ""
         item['images'] = ""
         return item
 
     def parse__comment(self,response):
-        pass
+	item = []
+	hxs = HtmlXPathSelector(response)
+	url = hxs.select("//input[@id=\"?tag=hot\"]/@value").extract()[0]
+	data = json.loads(requests.get(url).text)[0]
+
+	item = NewsItem()
+	item['best'] = hxs.select("//meta[@name=\"keywords\"]@content").extract()[0]
+	
+	items.append(item)
+	
+	return items

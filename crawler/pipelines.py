@@ -5,18 +5,34 @@ from scrapy import log
 from crawler.settings import MONGODB
 
 class mongo_storage(object):
+    
+    #f=open('sohu','wb')
     def __init__(self):
         #connection = pymongo.Connection(MONGODB['host'],MONGODB['port'])
         #self.db = connection[MONGODB['name']]
         self.date = datetime.now().strftime("%Y-%m-%d")
 
     def process_item(self,item,spider):
-        if 'TuanItem' == item.__class__.__name__:
+	if 'TuanItem' == item.__class__.__name__:
 	    self.process_tuan_item(item)
 	elif 'StoreItem' == item.__class__.__name__:
 	    self.process_store_item(item)
 	else:
-	    raise DropItem("Unknown Item Type!!!")
+	    #print dict(item)
+	    f=open(item['title'],'w')
+	    #item['content'].replace("br","\n")
+	    f.write(str(item['title'].encode('utf-8')))
+	    f.write("\n*******************************\n")
+	    f.write(str(item['datetime'].encode('utf-8')))
+	    f.write("\n*******************************\n")
+	    f.write(str(item['keywords'].encode('utf-8')))
+	    f.write("\n*******************************\n")
+	    f.write(str(item['content'].encode('utf-8')))
+	    f.write("\n*******************************\n")
+	    f.write(str(item['comments'].encode('utf-8')))
+            f.write("\n")
+	    f.write(str(item['best'].encode('utf-8')))
+	    f.close()
 	return item
 
     def process_tuan_item(self,item):
