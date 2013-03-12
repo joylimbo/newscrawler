@@ -36,11 +36,12 @@ class Spider(CrawlSpider):
         item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
         item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
-	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
+	item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
+	for i in list(set(hxs.select("//div[@class=\"w1 bd3\"]/p[2]"))):#.extract()[0].strip())):
+	    item['comments_best']=i.extract()[0].strip()
 	#item['comments_best'] = hxs.select("//div[@class=\"w1 bd3\"]/p[2]").extract()[0].strip()
 	item['tags'] = ""
-	for i in list(set(hxs.select("//a/@href").re("/n/.*/"))):
-            item['images'] = hxs.select("//img/@src").extract()[0].strip() 
+        item['images'] = ""
         return item
 
     def parse__comment(self,response):

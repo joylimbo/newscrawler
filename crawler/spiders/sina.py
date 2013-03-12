@@ -16,15 +16,15 @@ from crawler.items import *
 class Spider(CrawlSpider):
     name = 'sina'
     start_urls =[
-            'http://3g.sina.com.cn/',
+            'http://www.sina.com.cn/',
             ]
     #"http://m.sohu.com/cm/367443014/?_once_=000019_pinglun_zhengwenye_gengduopinglunv2&tag=all&_smuid=1FlfiUkvPt9rZMvzn6Qjxa&v=2"
     #"http://m.sohu.com/cm/367443014/?page=3&tag=all"
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//li/a/@href"))):
-            yield Request("http://3g.sina.com.cn"+url+"?show_rest_pages=1",callback=self.parse_content)
+        for url in list(set(hxs.select("//li/a[@target=\"_blank\"]/@href").extract()[0].strip())):
+            yield Request("http://www.sina.com.cn"+url+"?show_rest_pages=1",callback=self.parse_content)
 
     def return_item(self,item):
         return items
@@ -32,16 +32,16 @@ class Spider(CrawlSpider):
     def parse_content(self,response):
         hxs = HtmlXPathSelector(response)
         item = NewsItem()
-        item['title'] = hxs.select("//div[@class=\"articleTitle\"]/text()").extract()[0].strip()
+        item['title'] = hxs.select("//title/text()").extract()[0].strip()
         #item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
-        item['datetime']= ""
-	item['content'] = hxs.select("//div[@class=\"articleContent\"]/text()").extract()[0].strip()
-	item['keywords'] = ""
-	item['comments'] = ""
-        #item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
+        #item['datetime']= ""
+	#item['content'] = ""#hxs.select("//div[@class=\"w1 b1 bd2\"]/div").extract()[0].strip()
+	#item['keywords'] = ""
+	#item['comments'] = ""
+        item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
-	item['tags'] = ""
-        item['images'] = ""
+	#item['tags'] = ""
+        #item['images'] = ""
         return item
 
     def parse__comment(self,response):

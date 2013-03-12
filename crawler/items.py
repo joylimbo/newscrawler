@@ -42,5 +42,5 @@ class NewsItem(Item):
     video = Field()
     tags = Field()
     keywords = Field()
-    comments = Field()
-    best = Field()
+    #comments = Field()
+    #comments_best = Field()
