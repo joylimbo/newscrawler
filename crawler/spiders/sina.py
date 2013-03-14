@@ -23,8 +23,8 @@ class Spider(CrawlSpider):
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//li/a[@target=\"_blank\"]/@href").extract()[0].strip())):
-            yield Request("http://www.sina.com.cn"+url+"?show_rest_pages=1",callback=self.parse_content)
+        for url in list(set(hxs.select("//li/a/@href").re("http://news.sina.com.cn/c/.*"))):
+            yield Request(url,callback=self.parse_content)
 
     def return_item(self,item):
         return items
@@ -32,12 +32,9 @@ class Spider(CrawlSpider):
     def parse_content(self,response):
         hxs = HtmlXPathSelector(response)
         item = NewsItem()
-        item['title'] = hxs.select("//title/text()").extract()[0].strip()
-        #item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
-        #item['datetime']= ""
-	#item['content'] = ""#hxs.select("//div[@class=\"w1 b1 bd2\"]/div").extract()[0].strip()
-	#item['keywords'] = ""
-	#item['comments'] = ""
+        item['title'] = hxs.select("//h1[@id=\"artibodyTitle\"]/text()").extract()[0].strip()
+        item['datetime'] = hxs.select("//span[@id=\"pub_data\"]/text()").extract()[0].strip()
+	item['content'] = hxs.select("//div[@id=\"artibody\"]/p").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
 	#item['tags'] = ""

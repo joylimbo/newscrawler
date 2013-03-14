@@ -14,17 +14,17 @@ from scrapy.http import Request
 from crawler.items import *
 
 class Spider(CrawlSpider):
-    name = 'sohu'
+    name = 'tecent'
     start_urls =[
-            'http://m.sohu.com/',
+            'http://www.qq.com/',
             ]
-    "http://m.sohu.com/cm/367443014/?_once_=000019_pinglun_zhengwenye_gengduopinglunv2&tag=all&_smuid=1FlfiUkvPt9rZMvzn6Qjxa&v=2"
-    "http://m.sohu.com/cm/367443014/?page=3&tag=all"
+    #"http://m.sohu.com/cm/367443014/?_once_=000019_pinglun_zhengwenye_gengduopinglunv2&tag=all&_smuid=1FlfiUkvPt9rZMvzn6Qjxa&v=2"
+    #"http://m.sohu.com/cm/367443014/?page=3&tag=all"
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//a/@href").re("/n/.*/"))):
-            yield Request("http://m.sohu.com"+url+"?show_rest_pages=1",callback=self.parse_content)
+        for url in list(set(hxs.select("//li/a/@href").re("http://news.qq.com/a/.*"))):
+            yield Request(url,callback=self.parse_content)
 
     def return_item(self,item):
         return items
@@ -32,14 +32,13 @@ class Spider(CrawlSpider):
     def parse_content(self,response):
         hxs = HtmlXPathSelector(response)
         item = NewsItem()
-        item['title'] = hxs.select("//h2[@class=\"a3\"]/text()").extract()[0].strip()
-        item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
-        item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
+        item['title'] = hxs.select("//div[@class=\"hd\"]/h1/text()").extract()[0].strip()
+        item['datetime'] = hxs.select("//span[@class=\"article-time\"]/text()").extract()[0].strip()
+	item['content'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
-	#item['comments_best'] = hxs.select("//div[@class=\"w1 bd3\"]/p[2]").extract()[0].strip()
-	item['tags'] = ""
-        item['images'] = hxs.select("//img/@src").extract() 
+	#item['tags'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/IMG/@alt").extract()
+        #item['images'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/P/IMG/@src").extract() 
         return item
 
     def parse__comment(self,response):
@@ -52,6 +51,5 @@ class Spider(CrawlSpider):
 	#item['best'] = hxs.select("//meta[@name=\"keywords\"]@content").extract()[0]
 	
 	#items.append(item)
-	
-	#return items
 	pass
+	#return items

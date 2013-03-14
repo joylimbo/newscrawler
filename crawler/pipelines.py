@@ -33,7 +33,9 @@ class mongo_storage(object):
             #f.write("\n")
 	    #f.write(str(item['comments_best'].encode('utf-8')))
 	    #f.write("\n")
-	    f.write(str(item['images'].encode('utf-8')))
+	    #f.write(str(item['images'].encode('utf-8')))
+	    #f.write(str(item['images']))
+	    #f.write(str(item['tags']))
 	    f.close()
 	return item
 
