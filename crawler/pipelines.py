@@ -7,6 +7,7 @@ from scrapy import log
 
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from scrapy.http import Request
+from crawler.settings import PROJECT_PATH
 
 class images_process(ImagesPipeline):
     def get_images(self, response, request, info):
@@ -24,7 +25,6 @@ class images_process(ImagesPipeline):
     def get_media_requests(self, item, info):
         #yield Request(item['image_link'])
         for image_url in item['image_link']:
-            print "################"
             yield Request(image_url)
 
     def item_completed(self, results, item, info):
@@ -50,7 +50,7 @@ class mongo_storage(object):
         else:
        
         #print dict(item)
-            f=open(item['title'],'w')
+            f=open(PROJECT_PATH+"/data/news/"+item['title'],'w')
             f.write(str(item['title'].encode('utf-8')))
             f.write("\n*******************************\n")
         #f.write(str(item['datetime'].encode('utf-8')))
