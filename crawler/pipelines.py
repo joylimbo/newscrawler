@@ -21,7 +21,7 @@ class images_process(ImagesPipeline):
 	yield key, image, buf
 
     def get_media_request(self, item, info):
-	for image_url in item['link']:
+	for image_url in item['image_link']:
 	    yield Request(image_url)
 
     def item_completed(self, results, item, info):

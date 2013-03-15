@@ -44,7 +44,14 @@ class NewsItem(Item):
     keywords = Field()
     #comments = Field()
     #comments_best = Field()
+    path = Field()
+    images = Field()
+    image_urls = Field()
+    image_paths = Field()
 
+    def __str__(self):
+	return ("ImgItem:%s"%(self['title']))
+ 
 class ImgItem(Item):
     hashmd5 = Field()
     name = Field()
