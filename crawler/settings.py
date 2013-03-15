@@ -1,7 +1,9 @@
 import os
-PROJECT_PATH = '/home/boat/workspace/code/minicrawler'
+#PROJECT_PATH = '/home/boat/workspace/code/minicrawler'
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__) + '/../')
 LIMIT = 10000
 
+IMAGES_STORE = PROJECT_PATH + '/data/images'
 BOT_NAME = 'news'
 
 SPIDER_MODULES = ['crawler.spiders']
@@ -16,7 +18,10 @@ USER_AGENT_LIST = [
     ]
 
 DEFAULT_ITEM_CLASS = 'crawler.items.CrawlerItem'
-ITEM_PIPELINES = ['crawler.pipelines.mongo_storage',]
+ITEM_PIPELINES = [
+	'crawler.pipelines.images_process',
+	'crawler.pipelines.mongo_storage',
+	]
 EXTENSIONS = {
 #    'scrapy.contrib.corestats.CoreStats': 500,
 #    'crawler.statstodb.StatsToMongo': 1000,

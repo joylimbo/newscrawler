@@ -33,19 +33,19 @@ class Spider(CrawlSpider):
         hxs = HtmlXPathSelector(response)
         item = NewsItem()
         item['title'] = hxs.select("//h2[@class=\"a3\"]/text()").extract()[0].strip()
-        item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
-        item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
-        item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
+        #item['datetime'] = hxs.select("//p[@class=\"a3 f12 c2 pb1\"]/text()").extract()[0].strip()
+        #item['content'] = hxs.select("//div[@class=\"w1 Text\"]/div").extract()[0].strip()
+        #item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
 	#item['comments_best'] = hxs.select("//div[@class=\"w1 bd3\"]/p[2]").extract()[0].strip()
-	item['tags'] = ""
-        item['images'] = hxs.select("//img/@src").extract() 
+	#item['tags'] = ""
+        item['image_link'] = hxs.select("//img/@src").extract() 
         return item
 
-    def parse__comment(self,response):
-	#item = []
-	#hxs = HtmlXPathSelector(response)
-	#url = hxs.select("//input[@id=\"?tag=hot\"]/@value").extract()[0]
+    def parse_images(self,response):
+	hxs = HtmlXPathSelector(response)
+	item = ImgItem()
+	item['link'] = hxs.select("//img/@src").extract()
 	#data = json.loads(requests.get(url).text)[0]
 
 	#item = NewsItem()
@@ -53,5 +53,5 @@ class Spider(CrawlSpider):
 	
 	#items.append(item)
 	
-	#return items
-	pass
+	return items
+	#pass
