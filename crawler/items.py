@@ -40,18 +40,20 @@ class NewsItem(Item):
     content = Field()
     image_link = Field()
     video = Field()
-    #tags = Field()
+    tags = Field()
     keywords = Field()
-    #comments = Field()
-    #comments_best = Field()
+    comment1 = Field()
+    comment2 = Field()
+    comment3 = Field()
+    comment_num = Field()
     path = Field()
     images = Field()
     image_urls = Field()
     image_paths = Field()
 
     def __str__(self):
-	return ("ImgItem:%s"%(self['title']))
- 
+        return ("ImgItem:%s"%(self['title']))
+
 class ImgItem(Item):
     hashmd5 = Field()
     name = Field()
