@@ -40,7 +40,7 @@ class Spider(CrawlSpider):
 	#item['ding1'] = hxs.select("//div[@class=\"w1 bd3\"]/p[@class=\"f\"][1]/a[2]/text()").extract()[0].strip()
 	item['comment2'] = hxs.select("//div[@class=\"w1 bd3\"][2]/p[2]").extract()[0].strip()
 	#item['ding2'] = hxs.select("//div[@class=\"w1 bd3\"]/p[@class=\"f\"][2]/a[2]/text()").extract()[0].strip()
-	item['comment3'] = hxs.select("//div[@class=\"w1 bd3\"][3]/p[2]/text()").extract()[0].strip()
+	item['comment3'] = hxs.select("//div[@class=\"w1 bd3\"][3]/p[2]").extract()[0].strip()
 	#item['ding3'] = hxs.select("//div[@class=\"w1 bd3\"]/p[@class=\"f\"][3]/a[2]/text()").extract()[0].strip()
         item['comment_num'] = hxs.select("//p[@class=\"w1 b1 bd2\"]/span/text()").extract()[0].strip()
         item['image_link'] = hxs.select("//p[@class=\"a3\"]/img/@src").extract()
