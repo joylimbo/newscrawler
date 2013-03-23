@@ -16,10 +16,8 @@ from crawler.items import *
 class Spider(CrawlSpider):
     name = 'tencent'
     start_urls =[
-            'http://www.qq.com/',
-            ]
-    #"http://m.sohu.com/cm/367443014/?_once_=000019_pinglun_zhengwenye_gengduopinglunv2&tag=all&_smuid=1FlfiUkvPt9rZMvzn6Qjxa&v=2"
-    #"http://m.sohu.com/cm/367443014/?page=3&tag=all"
+            'http://news.qq.com/',
+	 ]
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
@@ -41,15 +39,3 @@ class Spider(CrawlSpider):
         item['image_link'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/p[@align=\"center\"]/img/@src").extract() 
         return item
 
-    def parse__comment(self,response):
-	#item = []
-	#hxs = HtmlXPathSelector(response)
-	#url = hxs.select("//input[@id=\"?tag=hot\"]/@value").extract()[0]
-	#data = json.loads(requests.get(url).text)[0]
-
-	#item = NewsItem()
-	#item['best'] = hxs.select("//meta[@name=\"keywords\"]@content").extract()[0]
-	
-	#items.append(item)
-	pass
-	#return items

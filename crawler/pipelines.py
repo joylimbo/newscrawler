@@ -1,3 +1,7 @@
+import requests
+import re
+
+from md5 import md5
 from datetime import datetime
 from cStringIO import StringIO
 from PIL import Image
@@ -39,49 +43,61 @@ class mongo_storage(object):
         self.date = datetime.now().strftime("%Y-%m-%d")
 
     def process_item(self,item,spider):
-        if 'TuanItem' == item.__class__.__name__:
-            self.process_tuan_item(item)
-        elif 'StoreItem' == item.__class__.__name__:
-            self.process_store_item(item)
-        elif 'ImgItem' == item.__class__.__name__:
+        if 'ImgItem' == item.__class__.__name__:
             self.process_img_item(item)
-        else:
+	elif 'NewsItem' == item.__class__.__name__:
+	    self.process_news_item(item)
+	else:
+        #elif 'UserItem' == item.__class__.__name__:
+	    #self.process_user_item(item)
+	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'w')
+	    f1.write(str(item['name'].encode('utf-8')))
+	    #f1.write(str(item['title'].encode('utf-8')))
+	    f1.write("\n")
+	    f1.write(str(item['amount']))
+	    #f1.write(str(item['url']))
+	    #f1.write("\n")
+	    #f1.write(str(item['comment_url']))
+	    f1.close()
+	#else:
        
         #print dict(item)
-            f=open(PROJECT_PATH+"/data/news/tencent/2013-3-19/"+item['title'],'w')
-            f.write(str(item['title'].encode('utf-8')))
-            f.write("\n*******************************\n")
-            f.write(str(item['datetime'].encode('utf-8')))
-            f.write("\n*******************************\n")
-            f.write(str(item['keywords'].encode('utf-8')))
-            f.write("\n*******************************\n")
-            f.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
-            f.write("\n*******************************\n")
-            #f.write(str(item['comment1'].encode('utf-8')))
+            #f=open(PROJECT_PATH+"/data/news/tencent/2013-3-23/"+item['title']+".txt",'w')
+	    #item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
+	    #f.write("<title>")
+            #f.write(str(item['title'].encode('utf-8')))
+            #f.write("\n*******************************\n")
+	    #f.write("\n<date>")
+            #f.write(str(item['datetime'].encode('utf-8')))
+            #f.write("\n*******************************\n")
+	    #f.write("\n<keywords>")
+            #f.write(str(item['keywords'].encode('utf-8')))
+            #f.write("\n*******************************\n")
+	    #f.write("\n<content>")
+            #f.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
+            #f.write("\n*******************************\n")
+            #f.write("No.1\n")
+	    #f.write(str(item['comment1'].encode('utf-8')))
             #f.write(str(item['ding1'].encode('utf-8')))
-	    f.write("\n")
+	    #f.write("No.2\n")
 	    #f.write(str(item['comment2'].encode('utf-8')))
 	    #f.write(str(item['ding2'].encode('utf-8')))
-	    f.write("\n")
+	    #f.write("No.3\n")
 	    #f.write(str(item['comment3'].encode('utf-8')))
 	    #f.write(str(item['ding3'].encode('utf-8')))
-	    f.write("\n")
+	    #f.write("\n")
             #f.write(str(item['comment_num'].encode('utf-8')))
-	    f.write("\n******************************\n")
+	    #f.write("\n******************************\n")
             #f.write(str(item['image_link']))
-            f.write(str(item['path']))
+	    #f.write("\n<path>")
+            #f.write(str(item['path']))
 	    #f.write(str(item['tags']))
-            f.close()
+            #f.close()
         return item
-
-    def process_tuan_item(self,item):
-        print dict(item)
-        #if self.db.tuan.find({"goodsid":item['goodsid'],"market":item['market']}).count() is 0:
-        #    self.db.tuan.insert(dict(item))
-        pass
-
-    def process_store_item(self,item):
-        print dict(item)
-        #if self.db.store.find({"lon":item['lon'],"lat":item['lat']}).count() is 0:
-        #    self.db.store.insert(dict(item))
-        pass
+    
+    #def process_user_item(self, item):
+	#f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'w')
+	#f1.write(str(item['title'].encode('utf-8')))
+	#f1.write(str(item['url']))
+	#f1.write(str(item['comment_url']))
+	#f.close()
