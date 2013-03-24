@@ -41,7 +41,7 @@ class mongo_storage(object):
         #connection = pymongo.Connection(MONGODB['host'],MONGODB['port'])
         #self.db = connection[MONGODB['name']]
         self.date = datetime.now().strftime("%Y-%m-%d")
-
+    
     def process_item(self,item,spider):
         if 'ImgItem' == item.__class__.__name__:
             self.process_img_item(item)
@@ -50,11 +50,14 @@ class mongo_storage(object):
 	else:
         #elif 'UserItem' == item.__class__.__name__:
 	    #self.process_user_item(item)
-	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'w')
+	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'a')
+	    f1.write("name:")
 	    f1.write(str(item['name'].encode('utf-8')))
 	    #f1.write(str(item['title'].encode('utf-8')))
 	    f1.write("\n")
+	    f1.write("amount:")
 	    f1.write(str(item['amount']))
+	    f1.write("\n")
 	    #f1.write(str(item['url']))
 	    #f1.write("\n")
 	    #f1.write(str(item['comment_url']))
