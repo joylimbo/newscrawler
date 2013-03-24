@@ -34,8 +34,8 @@ class UserItem(Item):
     platform = Field()
     amount = Field()
 
-    def __str__(self):
-	return ("UserItem:%s"%(self['name']))
+#    def __str__(self):
+#	return ("UserItem:%s"%(self['name']))
 
 class ImgItem(Item):
  #   hashmd5 = Field()

@@ -21,16 +21,16 @@ class Spider(CrawlSpider):
         items = []
         statuses = json.loads(response.body)['trends'].values()[0]#'data']
         for s in statuses:
-            items.append(self.user(s))
-	    print(s)
-	    print(statuses)
+            #items.append(self.user(s))
+	    print "s=",s
+	    print "statuses=",statuses
+	    items.append(self.user(s))
         return items
 
     def user(self, user):
         item = UserItem()
         #item['name'] = user.get('title','')
         item['name'] = user.get('name','')
-	item['platform'] = 'swb'
 	item['amount'] = user.get('amount','')
         #item['url'] = user.get('url','')
         #item['comment_url'] = user.get('comment_url','')
