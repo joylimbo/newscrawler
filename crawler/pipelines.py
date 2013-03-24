@@ -45,11 +45,7 @@ class mongo_storage(object):
     def process_item(self,item,spider):
         if 'ImgItem' == item.__class__.__name__:
             self.process_img_item(item)
-	elif 'NewsItem' == item.__class__.__name__:
-	    self.process_news_item(item)
-	else:
-        #elif 'UserItem' == item.__class__.__name__:
-	    #self.process_user_item(item)
+        elif 'UserItem' == item.__class__.__name__:
 	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'a')
 	    f1.write("name:")
 	    f1.write(str(item['name'].encode('utf-8')))
@@ -62,22 +58,22 @@ class mongo_storage(object):
 	    #f1.write("\n")
 	    #f1.write(str(item['comment_url']))
 	    f1.close()
-	#else:
        
+	elif 'NewsItem' == item.__class__.__name__:
         #print dict(item)
-            #f=open(PROJECT_PATH+"/data/news/tencent/2013-3-23/"+item['title']+".txt",'w')
-	    #item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
-	    #f.write("<title>")
-            #f.write(str(item['title'].encode('utf-8')))
+            f=open(PROJECT_PATH+"/data/news/tencent/2013-3-24/"+item['title']+".txt",'w')
+	    item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
+	    f.write("<title>")
+            f.write(str(item['title'].encode('utf-8')))
             #f.write("\n*******************************\n")
-	    #f.write("\n<date>")
-            #f.write(str(item['datetime'].encode('utf-8')))
+	    f.write("\n<date>")
+            f.write(str(item['datetime'].encode('utf-8')))
             #f.write("\n*******************************\n")
-	    #f.write("\n<keywords>")
-            #f.write(str(item['keywords'].encode('utf-8')))
+	    f.write("\n<keywords>")
+            f.write(str(item['keywords'].encode('utf-8')))
             #f.write("\n*******************************\n")
-	    #f.write("\n<content>")
-            #f.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
+	    f.write("\n<content>")
+            f.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
             #f.write("\n*******************************\n")
             #f.write("No.1\n")
 	    #f.write(str(item['comment1'].encode('utf-8')))
@@ -95,12 +91,5 @@ class mongo_storage(object):
 	    #f.write("\n<path>")
             #f.write(str(item['path']))
 	    #f.write(str(item['tags']))
-            #f.close()
+            f.close()
         return item
-    
-    #def process_user_item(self, item):
-	#f1=open(PROJECT_PATH+"/data/news/rank/sina_rank",'w')
-	#f1.write(str(item['title'].encode('utf-8')))
-	#f1.write(str(item['url']))
-	#f1.write(str(item['comment_url']))
-	#f.close()
