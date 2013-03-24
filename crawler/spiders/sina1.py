@@ -12,18 +12,16 @@ from crawler.items import *
 class Spider(CrawlSpider):
     name = 'sina1'
     start_urls = [
-	    'https://api.weibo.com/2/trends/daily.json?acess_token=2.00qeXEHC5wcU_Dc5e1cf3ffcBuQFEE',
+	    'https://api.weibo.com/2/trends/daily.json?access_token=2.00qeXEHC5wcU_Dc5e1cf3ffcBuQFEE',
             #'http://top.news.com.cn/ws/GetTopDataList.php?top type=day&top cat=www all&top time=20130322&top show num=100&top order=ASC&js var=all 1 data01',
             ]
     is_start = True
 
     def parse(self, response):
         items = []
-        statuses = json.loads(response.body)['trends']#'data']
+        statuses = json.loads(response.body)['trends'].values()[0]#'data']
         for s in statuses:
-            u = s['user']
-            items.append(self.user(u))
-            #items.append(self.status(s))
+            items.append(self.user(s))
         return items
 
     def user(self, user):

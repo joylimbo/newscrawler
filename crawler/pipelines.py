@@ -13,27 +13,27 @@ from scrapy.contrib.pipeline.images import ImagesPipeline
 from scrapy.http import Request
 from crawler.settings import PROJECT_PATH
 
-class images_process(ImagesPipeline):
-    def get_images(self, response, request, info):
-        key = self.image_key(request.url)
-        orig_image = Image.open(StringIO(response.body))
+#class images_process(ImagesPipeline):
+#    def get_images(self, response, request, info):
+#        key = self.image_key(request.url)
+#        orig_image = Image.open(StringIO(response.body))
 
-        width, height = orig_image.size
+#        width, height = orig_image.size
 
-        image, buf = self.convert_image(orig_image)
-        yield key, image, buf
+#        image, buf = self.convert_image(orig_image)
+#        yield key, image, buf
 
-    def get_media_requests(self, item, info):
-        for image_url in item['image_link']:
-            yield Request(image_url)
+#    def get_media_requests(self, item, info):
+#        for image_url in item['image_link']:
+#            yield Request(image_url)
 
-    def item_completed(self, results, item, info):
-        image_paths = [x['path'] for ok, x in results if ok]
-        if not image_paths:
-            raise DropItem("Item contains no images")
-        else:
-	    item['path'] = image_paths
-	return item
+#    def item_completed(self, results, item, info):
+#        image_paths = [x['path'] for ok, x in results if ok]
+#        if not image_paths:
+#            raise DropItem("Item contains no images")
+#        else:
+#	    item['path'] = image_paths
+#	return item
 
 class mongo_storage(object):
     
