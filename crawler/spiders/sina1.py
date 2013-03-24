@@ -20,10 +20,11 @@ class Spider(CrawlSpider):
     def parse(self, response):
         items = []
         statuses = json.loads(response.body)['trends'].values()[0]#'data']
+	print "statuses",statuses
         for s in statuses:
             #items.append(self.user(s))
 	    print "s=",s
-	    print "statuses=",statuses
+	    #print "statuses=",statuses
 	    items.append(self.user(s))
         return items
 
