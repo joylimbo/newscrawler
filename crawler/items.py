@@ -9,7 +9,7 @@ class NewsItem(Item):
     datetime  = Field()
     content = Field()
     image_link = Field()
-    video = Field()
+    video_link = Field()
     tags = Field()
     keywords = Field()
     comment1 = Field()
@@ -26,6 +26,13 @@ class NewsItem(Item):
 
     def __str__(self):
         return ("ImgItem:%s"%(self['title']))
+
+class VideoItem(Item):
+    title = Field()
+    subtitle = Field()
+
+    def __str__(self):
+	return ("VideoItem:%s"%(self['title']))
 
 class UserItem(Item):
     name = Field()

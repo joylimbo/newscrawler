@@ -45,6 +45,17 @@ class mongo_storage(object):
     def process_item(self,item,spider):
         if 'ImgItem' == item.__class__.__name__:
             self.process_img_item(item)
+
+	elif 'VideoItem' == item.__class__.__name__:
+	    f2=open(PROJECT_PATH+"/data/videos/youku_video.txt",'a')
+            f2.write("<title>")
+            f2.write(str(item['title'].encode('utf-8')))
+            f2.write("\n")
+            #f2.write("<subtitle>")
+            #f2.write(str(item['subtitle'].encode('utf-8')))
+	    #f2.write("\n")
+	    f2.close()
+
         elif 'UserItem' == item.__class__.__name__:
 	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank.txt",'a')
 	    f1.write("<name>")
@@ -64,7 +75,7 @@ class mongo_storage(object):
        
 	elif 'NewsItem' == item.__class__.__name__:
         #print dict(item)
-            f=open(PROJECT_PATH+"/data/news/tencent/2013-3-24/"+item['title']+".txt",'w')
+            f=open(PROJECT_PATH+"/data/news/tencent/2013-3-25/"+item['title']+".txt",'w')
 	    item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
 	    f.write("<title>")
             f.write(str(item['title'].encode('utf-8')))
@@ -91,8 +102,9 @@ class mongo_storage(object):
             #f.write(str(item['comment_num'].encode('utf-8')))
 	    #f.write("\n******************************\n")
             #f.write(str(item['image_link']))
-	    f.write("\n<path>")
+	    f.write("\n<image_path>")
             f.write(str(item['path']))
-	    #f.write(str(item['tags']))
+	    f.write("\n<video_path>")
+	    f.write(str(item['video_link']))
             f.close()
         return item

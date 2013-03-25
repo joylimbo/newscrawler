@@ -35,7 +35,7 @@ class Spider(CrawlSpider):
 	item['content'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
-	#item['tags'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/IMG/@alt").extract()
+	item['video_link'] = hxs.select("//h3/a[@target=\"_blank\"]/@href").extract()
         item['image_link'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/p[@align=\"center\"]/img/@src").extract() 
         return item
 
