@@ -14,14 +14,14 @@ from scrapy.http import Request
 from crawler.items import *
 
 class Spider(CrawlSpider):
-    name = 'tencent'
+    name = 'sina'
     start_urls =[
-            'http://news.qq.com/',
+            'http://news.sina.com.cn/',
 	 ]
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//li/a/@href").re("http://news.qq.com/a/.*"))):
+        for url in list(set(hxs.select("//a/@href").re("http://news.sina.com.cn/c/.*"))):
             yield Request(url,callback=self.parse_content)
 
     def return_item(self,item):
@@ -29,13 +29,13 @@ class Spider(CrawlSpider):
 
     def parse_content(self,response):
         hxs = HtmlXPathSelector(response)
-        item = QQNewsItem()
-        item['title'] = hxs.select("//div[@class=\"hd\"]/h1/text()").extract()[0].strip()
-        item['datetime'] = hxs.select("//span[@class=\"article-time\"]/text()").extract()[0].strip()
-	item['content'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]").extract()[0].strip()
+        item = SinaNewsItem()
+        item['title'] = hxs.select("//h1[@id=\"artibodyTitle\"]/text()").extract()[0].strip()
+        item['datetime'] = hxs.select("//span[@id=\"pub_date\"]/text()").extract()[0].strip()
+	item['content'] = hxs.select("//div[@class=\"blkContainerSblkCon BSHARE_POP\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
-	item['video_link'] = hxs.select("//h3/a[@target=\"_blank\"]/@href").extract()
-        item['image_link'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]/p[@align=\"center\"]/img/@src").extract() 
+	#item['video_link'] = hxs.select("//h3/a[@target=\"_blank\"]/@href").extract()
+        item['image_link'] = hxs.select("//div[@class=\"img_wrapper\"]/img/@src").extract()
         return item
 

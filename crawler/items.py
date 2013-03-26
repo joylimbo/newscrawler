@@ -4,7 +4,30 @@ from scrapy.item import Item, Field
 class CrawlerItem(Item):
     pass
 
-class NewsItem(Item):
+class SohuNewsItem(Item):
+    title = Field()
+    datetime = Field()
+    source = Field()
+    content = Field()
+    image_link = Field()
+    video_link = Field()
+    keywords = Field()
+    comment1 = Field()
+    comment2 = Field()
+    comment3 = Field()
+    comment_num = Field()
+    ding1 = Field()
+    ding2 = Field()
+    ding3 = Field()
+    path = Field()
+    images = Field()
+    image_urls = Field()
+    image_paths = Field()
+
+    def __str__(self):
+	return ("ImgItem:%s"%(self['title']))
+
+class QQNewsItem(Item):
     title = Field()
     datetime  = Field()
     content = Field()
@@ -26,6 +49,30 @@ class NewsItem(Item):
 
     def __str__(self):
         return ("ImgItem:%s"%(self['title']))
+
+class SinaNewsItem(Item):
+    title = Field()
+    datetime  = Field()
+    content = Field()
+    image_link = Field()
+    video_link = Field()
+    tags = Field()
+    keywords = Field()
+    comment1 = Field()
+    comment2 = Field()
+    comment3 = Field()
+    comment_num = Field()
+    ding1 = Field()
+    ding2 = Field()
+    ding3 = Field()
+    path = Field()
+    images = Field()
+    image_urls = Field()
+    image_paths = Field()
+
+    def __str__(self):
+        return ("ImgItem:%s"%(self['title']))
+
 
 class VideoItem(Item):
     title = Field()
