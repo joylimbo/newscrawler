@@ -47,7 +47,7 @@ class mongo_storage(object):
             self.process_img_item(item)
 
 	elif 'VideoItem' == item.__class__.__name__:
-	    f2=open(PROJECT_PATH+"/data/videos/youku_video.txt",'a')
+	    f2=open(PROJECT_PATH+"/data/videos/2013-03-27/youku_video.txt",'a')
             f2.write("<title>")
             f2.write(str(item['title'].encode('utf-8')))
             f2.write("\n")
@@ -57,13 +57,9 @@ class mongo_storage(object):
 	    f2.close()
 
         elif 'UserItem' == item.__class__.__name__:
-	    f1=open(PROJECT_PATH+"/data/news/rank/sina_rank.txt",'a')
+	    f1=open(PROJECT_PATH+"/data/news/rank/2013-03-27/sina_rank.txt",'a')
 	    f1.write("<name>")
 	    f1.write(str(item['name'].encode('utf-8')))
-	    #f1.write(str(item['title'].encode('utf-8')))
-	    #f1.write("\n")
-	    #f1.write("amount:")
-	    #f1.write(str(item['amount']))
 	    f1.write("\n")
 	    f1.write("<url>")
 	    f1.write(str(item['url']))
@@ -75,7 +71,7 @@ class mongo_storage(object):
 
 	elif 'SinaNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f4=open(PROJECT_PATH+"/data/news/sina/2013-03-26/"+item['title']+".txt",'w')
+            f4=open(PROJECT_PATH+"/data/news/sina/2013-03-27/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f4.write("<title>")
             f4.write(str(item['title'].encode('utf-8')))
@@ -98,7 +94,6 @@ class mongo_storage(object):
             #f.write(str(item['ding3'].encode('utf-8')))
             #f.write("\n")
             #f.write(str(item['comment_num'].encode('utf-8')))
-            #f.write("\n******************************\n")
             #f.write(str(item['image_link']))
             f4.write("\n<image_path>")
             f4.write(str(item['path']))
@@ -106,7 +101,7 @@ class mongo_storage(object):
       
 	elif 'SohuNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f3=open(PROJECT_PATH+"/data/news/sohu/2013-03-26/"+item['title']+".txt",'w')
+            f3=open(PROJECT_PATH+"/data/news/sohu/2013-03-27/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f3.write("<title>")
             f3.write(str(item['title'].encode('utf-8')))
@@ -129,7 +124,6 @@ class mongo_storage(object):
             #f.write(str(item['ding3'].encode('utf-8')))
             #f.write("\n")
             #f.write(str(item['comment_num'].encode('utf-8')))
-            #f.write("\n******************************\n")
             #f.write(str(item['image_link']))
             f3.write("\n<image_path>")
 	    f3.write(str(item['path']))
@@ -137,20 +131,16 @@ class mongo_storage(object):
 
 	elif 'QQNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f=open(PROJECT_PATH+"/data/news/tencent/2013-03-26/"+item['title']+".txt",'w')
+            f=open(PROJECT_PATH+"/data/news/tencent/2013-03-27/"+item['title']+".txt",'w')
 	    item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
 	    f.write("<title>")
             f.write(str(item['title'].encode('utf-8')))
-            #f.write("\n*******************************\n")
 	    f.write("\n<date>")
             f.write(str(item['datetime'].encode('utf-8')))
-            #f.write("\n*******************************\n")
 	    f.write("\n<keywords>")
             f.write(str(item['keywords'].encode('utf-8')))
-            #f.write("\n*******************************\n")
 	    f.write("\n<content>")
             f.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
-            #f.write("\n*******************************\n")
             #f.write("No.1\n")
 	    #f.write(str(item['comment1'].encode('utf-8')))
             #f.write(str(item['ding1'].encode('utf-8')))
@@ -162,7 +152,6 @@ class mongo_storage(object):
 	    #f.write(str(item['ding3'].encode('utf-8')))
 	    #f.write("\n")
             #f.write(str(item['comment_num'].encode('utf-8')))
-	    #f.write("\n******************************\n")
             #f.write(str(item['image_link']))
 	    f.write("\n<image_path>")
             f.write(str(item['path']))
