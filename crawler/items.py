@@ -91,6 +91,18 @@ class UserItem(Item):
     def __str__(self):
 	return ("UserItem:%s"%(self['name']))
 
+class SinaRankItem(Item):
+    id_num = Field()
+    title = Field()
+    keywords = Field()
+    time = Field()
+    media = Field()
+    comment_url = Field()
+    url = Field()
+
+    def __str__(self):
+        return ("SinaRankItem:%s"%(self['title']))
+
 class ImgItem(Item):
  #   hashmd5 = Field()
   #  name = Field()

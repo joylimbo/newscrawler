@@ -18,7 +18,7 @@ USER_AGENT_LIST = [
 
 DEFAULT_ITEM_CLASS = 'crawler.items.CrawlerItem'
 ITEM_PIPELINES = [
-	'crawler.pipelines.images_process',
+#	'crawler.pipelines.images_process',
 	'crawler.pipelines.mongo_storage',
 	]
 EXTENSIONS = {
