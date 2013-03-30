@@ -47,7 +47,7 @@ class mongo_storage(object):
             self.process_img_item(item)
 
 	elif 'VideoItem' == item.__class__.__name__:
-	    f2=open(PROJECT_PATH+"/data/videos/2013-03-29/youku_video.txt",'a')
+	    f2=open(PROJECT_PATH+"/data/videos/2013-03-30/youku_video.txt",'a')
             f2.write("<title>")
             f2.write(str(item['title'].encode('utf-8')))
             f2.write("\n")
@@ -57,7 +57,7 @@ class mongo_storage(object):
 	    f2.close()
 
         elif 'UserItem' == item.__class__.__name__:
-	    f1=open(PROJECT_PATH+"/data/news/rank/2013-03-29/sina_rank.txt",'a')
+	    f1=open(PROJECT_PATH+"/data/news/rank/2013-03-30/sina_rank.txt",'a')
 	    f1.write("<name>")
 	    f1.write(str(item['name'].encode('utf-8')))
 	    f1.write("\n")
@@ -70,7 +70,7 @@ class mongo_storage(object):
 	    f1.close()
 
 	elif 'SinaRankItem' == item.__class__.__name__:
-            f5=open(PROJECT_PATH+"/data/news/rank/2013-03-29/sina_rank.txt",'a')
+            f5=open(PROJECT_PATH+"/data/news/rank/2013-03-30/sina_rank.txt",'a')
             f5.write("<id>")
             f5.write(str(item['id_num']))
             f5.write("\n")
@@ -97,7 +97,7 @@ class mongo_storage(object):
 
 	elif 'SinaNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f4=open(PROJECT_PATH+"/data/news/sina/2013-03-29/"+item['title']+".txt",'w')
+            f4=open(PROJECT_PATH+"/data/news/sina/2013-03-30/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f4.write("<title>")
             f4.write(str(item['title'].encode('utf-8')))
@@ -127,7 +127,7 @@ class mongo_storage(object):
       
 	elif 'SohuNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f3=open(PROJECT_PATH+"/data/news/sohu/2013-03-29/"+item['title']+".txt",'w')
+            f3=open(PROJECT_PATH+"/data/news/sohu/2013-03-30/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f3.write("<title>")
             f3.write(str(item['title'].encode('utf-8')))
@@ -157,7 +157,7 @@ class mongo_storage(object):
 
 	elif 'QQNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f=open(PROJECT_PATH+"/data/news/tencent/2013-03-29/"+item['title']+".txt",'w')
+            f=open(PROJECT_PATH+"/data/news/tencent/2013-03-30/"+item['title']+".txt",'w')
 	    item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
 	    f.write("<title>")
             f.write(str(item['title'].encode('utf-8')))
