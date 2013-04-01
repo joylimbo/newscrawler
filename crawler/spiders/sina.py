@@ -12,6 +12,7 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.conf import settings
 from scrapy.http import Request
 from crawler.items import *
+from crawler.spiders.rank.py import *
 
 class Spider(CrawlSpider):
     name = 'sina'

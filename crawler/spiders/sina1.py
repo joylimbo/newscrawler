@@ -13,7 +13,7 @@ class Spider(CrawlSpider):
     name = 'sina1'
     start_urls = [
 	    #'https://api.weibo.com/2/trends/daily.json?access_token=2.00qeXEHC5wcU_Dc5e1cf3ffcBuQFEE',
-            'http://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=week&top_cat=www_all&top_time=20130329&top_show_num=100&top_order=ASC&js_var=all_1_data01'
+            'http://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=week&top_cat=www_all&top_time=20130330&top_show_num=100&top_order=ASC&js_var=all_1_data01'
 	    ]
     is_start = True
 

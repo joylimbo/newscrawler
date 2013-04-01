@@ -45,4 +45,5 @@ class Spider(CrawlSpider):
         item['datetime'] = hxs.select("//span[@id=\"pub_date\"]/text()").extract()[0].strip()
         item['content'] = hxs.select("//div[@class=\"blkContainerSblkCon BSHARE_POP\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
+	#item['image_link'] = hxs.select("//div[@class=\"img_wrapper\"]/img/@src").extract()
         return item
