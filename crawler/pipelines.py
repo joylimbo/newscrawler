@@ -70,8 +70,10 @@ class mongo_storage(object):
 	    f1.close()
 
 	elif 'SinaRankItem' == item.__class__.__name__:
-            #f5=open(PROJECT_PATH+"/data/news/rank/2013-04-01/sina_rank.py",'a')
-	    f5=open(PROJECT_PATH+"/crawler/spiders/rank.py",'a')
+	    f5=open(PROJECT_PATH+"/crawler/spiders/rank.txt",'a')
+            f5.write(str(item['url']))
+            f5.write("\n")
+	    f5.close()
             #f5.write("<id>")
             #f5.write(str(item['id_num']))
             #f5.write("\n")
@@ -91,10 +93,10 @@ class mongo_storage(object):
             #f5.write(str(item['comment_url']))
             #f5.write("\n")
 	    #f5.write("<url>")
-	    f5.write(str(item['url']))
-            f5.write("\n")
+	    #f5.write(str(item['url']))
+            #f5.write("\n")
 	    #f5.write("********************************************\n")
-            f5.close()
+            #f5.close()
 
 	elif 'SinaNewsItem' == item.__class__.__name__:
         #print dict(item)
@@ -122,8 +124,8 @@ class mongo_storage(object):
             #f.write("\n")
             #f.write(str(item['comment_num'].encode('utf-8')))
             #f.write(str(item['image_link']))
-            #f4.write("\n<image_path>")
-            #f4.write(str(item['path']))
+            f4.write("\n<image_path>")
+            f4.write(str(item['path']))
             f4.close()
       
 	elif 'SohuNewsItem' == item.__class__.__name__:
@@ -185,4 +187,5 @@ class mongo_storage(object):
 	    f.write("\n<video_path>")
 	    f.write(str(item['video_link']))
             f.close()
+
         return item

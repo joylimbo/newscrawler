@@ -12,7 +12,7 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.conf import settings
 from scrapy.http import Request
 from crawler.items import *
-from crawler.spiders.rank.py import *
+from crawler.settings import PROJECT_PATH
 
 class Spider(CrawlSpider):
     name = 'sina'
@@ -22,8 +22,16 @@ class Spider(CrawlSpider):
 
     def parse(self,response):
         hxs = HtmlXPathSelector(response)
-        for url in list(set(hxs.select("//a/@href").re("http://news.sina.com.cn/c/.*"))):
-            yield Request(url,callback=self.parse_content)
+
+	rank = open(PROJECT_PATH+"/crawler/spiders/rank.txt",'r')
+        #url = rank.readline()
+	for url in rank.readlines():
+	    print url
+            yield Request(url[0:-1:],callback=self.parse_content)
+        rank.close()
+
+        #for url in list(set(hxs.select("//a/@href").re("http://news.sina.com.cn/c/.*"))):
+            #yield Request(url,callback=self.parse_content)
 
     def return_item(self,item):
         return items

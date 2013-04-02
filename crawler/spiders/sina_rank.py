@@ -8,6 +8,7 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request,FormRequest
 from crawler.items import *
+from crawler.settings import PROJECT_PATH
 
 class Spider(CrawlSpider):
     name = 'sina_rank'
@@ -29,8 +30,11 @@ class Spider(CrawlSpider):
             item['url'] = rank_list.get('url','')
             item['comment_url'] = rank_list.get('comment_url','')
             items.append(item)
-
-        yield Request(item['url'],callback=self.parse_content)
+	
+	#rank = open(PROJECT_PATH+"/crawler/spiders/rank.txt",'r')
+	#url = rank.readline()
+        #yield Request(url,callback=self.parse_content)
+	#rank.close()
 
         for item in items:
             yield self.return_item(item)
