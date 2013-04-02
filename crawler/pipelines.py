@@ -47,7 +47,7 @@ class mongo_storage(object):
             self.process_img_item(item)
 
 	elif 'VideoItem' == item.__class__.__name__:
-	    f2=open(PROJECT_PATH+"/data/videos/2013-04-01/youku_video.txt",'a')
+	    f2=open(PROJECT_PATH+"/data/videos/2013-04-02/youku_video.txt",'a')
             f2.write("<title>")
             f2.write(str(item['title'].encode('utf-8')))
             f2.write("\n")
@@ -57,7 +57,7 @@ class mongo_storage(object):
 	    f2.close()
 
         elif 'UserItem' == item.__class__.__name__:
-	    f1=open(PROJECT_PATH+"/data/news/rank/2013-04-01/sina_rank.txt",'a')
+	    f1=open(PROJECT_PATH+"/data/news/rank/2013-04-02/sina_rank.txt",'a')
 	    f1.write("<name>")
 	    f1.write(str(item['name'].encode('utf-8')))
 	    f1.write("\n")
@@ -100,7 +100,7 @@ class mongo_storage(object):
 
 	elif 'SinaNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f4=open(PROJECT_PATH+"/data/news/sina/2013-04-01/"+item['title']+".txt",'w')
+            f4=open(PROJECT_PATH+"/data/news/sina/2013-04-02/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f4.write("<title>")
             f4.write(str(item['title'].encode('utf-8')))
@@ -130,7 +130,7 @@ class mongo_storage(object):
       
 	elif 'SohuNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f3=open(PROJECT_PATH+"/data/news/sohu/2013-04-01/"+item['title']+".txt",'w')
+            f3=open(PROJECT_PATH+"/data/news/sohu/2013-04-02/"+item['title']+".txt",'w')
             item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
             f3.write("<title>")
             f3.write(str(item['title'].encode('utf-8')))
@@ -160,7 +160,7 @@ class mongo_storage(object):
 
 	elif 'QQNewsItem' == item.__class__.__name__:
         #print dict(item)
-            f=open(PROJECT_PATH+"/data/news/tencent/2013-04-01/"+item['title']+".txt",'w')
+            f=open(PROJECT_PATH+"/data/news/tencent/2013-04-02/"+item['title']+".txt",'w')
 	    item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
 	    f.write("<title>")
             f.write(str(item['title'].encode('utf-8')))
@@ -187,5 +187,22 @@ class mongo_storage(object):
 	    f.write("\n<video_path>")
 	    f.write(str(item['video_link']))
             f.close()
+
+	elif 'QQNewsRankItem' == item.__class__.__name__:
+            f6=open(PROJECT_PATH+"/data/news/tencent/2013-04-02/"+item['title']+".txt",'w')
+            item['content'] = re.sub(ur'<[^>]*>','\n',re.sub(ur'\]\]>','',item['content']))
+            f6.write("<title>")
+            f6.write(str(item['title'].encode('utf-8')))
+            f6.write("\n<date>")
+            f6.write(str(item['datetime'].encode('utf-8')))
+            f6.write("\n<keywords>")
+            f6.write(str(item['keywords'].encode('utf-8')))
+            f6.write("\n<content>")
+            f6.write(str(item['content'].replace("<br>","\n").encode('utf-8')))
+            f6.write("\n<image_path>")
+            f6.write(str(item['path']))
+            f6.write("\n<video_path>")
+            f6.write(str(item['video_link']))
+            f6.close()
 
         return item

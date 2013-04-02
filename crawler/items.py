@@ -103,6 +103,21 @@ class SinaRankItem(Item):
     def __str__(self):
         return ("SinaRankItem:%s"%(self['title']))
 
+class QQNewsRankItem(Item):
+    title = Field()
+    datetime  = Field()
+    content = Field()
+    image_link = Field()
+    video_link = Field()
+    keywords = Field()
+    path = Field()
+    images = Field()
+    image_urls = Field()
+    image_paths = Field()
+
+    def __str__(self):
+        return ("ImgItem:%s"%(self['title']))
+
 class ImgItem(Item):
  #   hashmd5 = Field()
   #  name = Field()
