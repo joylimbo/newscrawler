@@ -29,7 +29,7 @@ class Spider(CrawlSpider):
 
     def parse_content(self,response):
         hxs = HtmlXPathSelector(response)
-        item = QQNewsRankItem()
+        item = QQNewsItem()
         item['title'] = hxs.select("//div[@class=\"hd\"]/h1/text()").extract()[0].strip()
         item['datetime'] = hxs.select("//span[@class=\"article-time\"]/text()").extract()[0].strip()
 	item['content'] = hxs.select("//div[@id=\"Cnt-Main-Article-QQ\"]").extract()[0].strip()
