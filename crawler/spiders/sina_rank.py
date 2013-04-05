@@ -49,5 +49,8 @@ class Spider(CrawlSpider):
         item['datetime'] = hxs.select("//span[@id=\"pub_date\"]/text()").extract()[0].strip()
         item['content'] = hxs.select("//div[@class=\"blkContainerSblkCon BSHARE_POP\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
-	#item['image_link'] = hxs.select("//div[@class=\"img_wrapper\"]/img/@src").extract()
+	item['image_link'] = hxs.select("//div[@class=\"img_wrapper\"]/img/@src").extract()
+	item['video_link'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@url-data").extract()
+        item['video_tag'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@title-data").extract()[0].strip()
+        item['video_source'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@source-data").extract()[0].strip()
         return item

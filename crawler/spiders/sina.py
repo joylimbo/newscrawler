@@ -24,7 +24,6 @@ class Spider(CrawlSpider):
         hxs = HtmlXPathSelector(response)
 
 	rank = open(PROJECT_PATH+"/crawler/spiders/rank.txt",'r')
-        #url = rank.readline()
 	for url in rank.readlines():
 	    print url
             yield Request(url[0:-1:],callback=self.parse_content)
@@ -44,7 +43,9 @@ class Spider(CrawlSpider):
 	item['content'] = hxs.select("//div[@class=\"blkContainerSblkCon BSHARE_POP\"]").extract()[0].strip()
         item['keywords'] = hxs.select("//meta[@name=\"keywords\"]/@content").extract()[0].strip()
 	#item['comments'] = hxs.select("//span[@class=\"c2\"]/text()").extract()[0].strip()
-	#item['video_link'] = hxs.select("//h3/a[@target=\"_blank\"]/@href").extract()
+	#item['video_link'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@url-data").extract()
+	#item['video_tag'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@title-data").extract()[0].strip()
+	#item['video_source'] = hxs.select("//div[@class=\"a-p-s-item J_Play_Item\"]/@source-data").extract()[0].strip()
         item['image_link'] = hxs.select("//div[@class=\"img_wrapper\"]/img/@src").extract()
         return item
 

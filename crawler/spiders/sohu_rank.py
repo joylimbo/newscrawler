@@ -44,7 +44,8 @@ class Spider(CrawlSpider):
 	#item['ding3'] = hxs.select("//div[@class=\"w1 bd3\"]/p[@class=\"f\"][3]/a[2]/text()").extract()[0].strip()
         #item['comment_num'] = hxs.select("//p[@class=\"w1 b1 bd2\"]/span/text()").extract()[0].strip()
         item['image_link'] = hxs.select("//div[@align=\"center\"]/img/@src").extract()
-	#item['source'] = hxs.select("//span[@id=\"media_span\"]/text()").extract()[0].strip()
+	item['video_link'] = hxs.select("//div[@class=\"text-video-tt\"]/a/@href").extract()[0].strip()
+	item['video_tag'] = hxs.select("//div[@class=\"text-video-tt\"]/a/@title").extract()[0].strip()
         return item
 
 #    def parse_images(self,response):
